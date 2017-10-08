@@ -43,9 +43,9 @@
 			//half offsetvert = v.vertex.x; //Horizontal
 			//half offsetvert = v.vertex.z; //Vertical
 
-			//half offsetvert = v.vertex.z + v.vertex.x; //Diagonal
+			half offsetvert = v.vertex.z + v.vertex.x; //Diagonal
 
-			half offsetvert = ((v.vertex.x * v.vertex.x) * (v.vertex.z * v.vertex.z)); //From Middle (Ripple Effect)
+			//half offsetvert = (v.vertex.x * v.vertex.x) + (v.vertex.z * v.vertex.z); //From Middle (Ripple Effect)
 
 			half value = _WScale * sin(_Time.w * _WSpeed + offsetvert * _WFrequency);
 			v.vertex.y += value;

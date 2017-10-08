@@ -84,8 +84,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Objects\Scripts\Test.cs" />
     <Compile Include="Assets\Objects\Scripts\WaveControl.cs" />
     <Compile Include="Assets\Objects\Scripts\WaveController.cs" />
+    <Compile Include="Assets\Objects\Scripts\WaveHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Objects\Shader\WaterShader.shader" />
