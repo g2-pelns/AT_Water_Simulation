@@ -29,7 +29,8 @@
 
 		half _Glossiness;
 		half _Metallic;
-		fixed4 _Color;
+		half4 _Color;
+		//fixed4 _Color;
 
 		// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
 		// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -40,21 +41,23 @@
 
 		void vert(inout appdata_full v)
 		{
-			//half offsetvert = v.vertex.x; //Horizontal
-			//half offsetvert = v.vertex.z; //Vertical
+			half offsetvert = v.vertex.x; //Horizontal
+			half offsetvert2 = v.vertex.z; //Vertical
 
-			half offsetvert = v.vertex.z + v.vertex.x; //Diagonal
+			//half offsetvert = v.vertex.z + v.vertex.x; //Diagonal
 
-			//half offsetvert = (v.vertex.x * v.vertex.x) + (v.vertex.z * v.vertex.z); //From Middle (Ripple Effect)
+			//half offsetvert2 = (v.vertex.x * v.vertex.x) + (v.vertex.z * v.vertex.z); //From Middle (Ripple Effect)
 
 			half value = _WScale * sin(_Time.w * _WSpeed + offsetvert * _WFrequency);
-			v.vertex.y += value;
+			half value2 = _WScale * sin(_Time.w * _WSpeed + offsetvert2 * _WFrequency);
+			v.vertex.y += value + value2;
+			v.normal.y += value + value2;
 		}
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
 			// Albedo comes from a texture tinted by color
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-			o.Albedo = c.rgb;
+			o.Albedo = _Color.rgb;
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
